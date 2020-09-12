@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>SMASHIT WEATHER APP</title>
+    <!-- Font Awesome CSS Icons (For cool glyphicons) -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/style.css">
+    <link rel="manifest" type="application/manifest+json" href="/manifest.webmanifest">
+    <!-- google fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&family=Roboto&family=Rye&display=swap" rel="stylesheet">
+    <!--PWA manifest ios support -->
+    <link rel="apple-touch-icon" href="/image/icons/icon-96x96.png">
+    <meta name="apple-mobile-node-vweb-app-status-bar" content="#aa7700">
+    <meta name= "theme-color" content="#777171">
+</head>
+<body>
+    <!--Jumbotron for Title-->
+    <div class="jumbotron">
+        <img src="/image/logo.png" alt="Smashit logo">
+        <h1><strong> Weather Forecast</strong></h1>
+    </div>
+    <div class="parent-container">
+        <!--Row for searching a city-->
+        <div class="top-row">
+            <div class="grouped-search-button">
+                <!--Here we create an HTML form for handling the inputs-->
+                <h2 class="search-title"><strong>Search for a City:</strong></h2>
+                <!--Here we create the text box for capturing the search city Name-->
+                <div class="input-group">
+                    <input type="text" class="form-control"id="search-city"  aria-label="City Search" aria-describedby="search-button">
+                    <div class="input-group-append">
+                        <button type="search" class="btn" id="search-button"><i class="fa fa-search"></i></button>
+                    </div>
+                </div>
+                <!--section for search city history-->
+                <button class=" btn" type="button" id="clear-history">Clear history</button>
+                <ul class="list-group" >
+
+                </ul>
+            </div>   
+            <div class="row current-weather-container">
+                <div class="col-sm-12" id="current-weather">
+                    <h3 class="city-name " id="current-city"></h3>
+                    <p>Temperature: <span class="current" id="temperature"></span></p>
+                    <p>Humidity: <span class="current" id="humidity"></span></p> 
+                    <p>Wind Speed: <span class="current" id="wind-speed"></span></p>
+                    <p>UV index: <span class="current rounded py-2 px-2 text-white" id="uv-index"></span></p> 
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--Row for future data to be dumped here-->
+    <div class="container-fluid" id ="future-weather">
+        <h3>5-Day Forecast:</h3>
+        <div class="second-row ">
+            <div class="col-sm-3 forecast text-white ml-2 mb-3 p-2 mt-2 rounded" >
+                <p id="fDate0"></p>
+                <p id="fImg0"></p>
+                <p>Temp: <span id="fTemp0"></span></p>
+                <p>Humidity: <span id="fHumidity0"></span></p>
+            </div>
+            <div class="col-sm-3 forecast " >
+                <p id="fDate1"></p>
+                <p id="fImg1"></p>
+                <p>Temp: <span id="fTemp1"></span></p>
+                <p>Humidity: <span id="fHumidity1"></span></p>
+            </div>
+            <div class="col-sm-3 forecast ">
+                <p id="fDate2"></p>
+                <p id="fImg2"></p>
+                <p>Temp: <span id="fTemp2"></span></p>
+                <p>Humidity: <span id="fHumidity2"></span></p>
+            </div>
+            <div class="col-sm-3 forecast text-white ml-2 mb-3 p-2 mt-2 rounded">
+                <p id="fDate3"></p>
+                <p id="fImg3"></p>
+                <p>Temp: <span id="fTemp3"></span></p>
+                <p>Humidity: <span id="fHumidity3"></span></p>
+            </div>
+            <div class="col-sm-3 forecast text-white ml-2 mb-3 p-2 mt-2 rounded" >
+                <p id="fDate4"></p>
+                <p id="fImg4"></p>
+                <p>Temp: <span id="fTemp4"></span></p>
+                <p>Humidity: <span id="fHumidity4"></span></p>
+            </div>
+        </div>
+    </div>
+            
+    <footer><p>developed by _tobajoseph</p></footer>
+    
+    <!--jQuery JS-->
+    <script src="https://code.jquery.com/jquery.js"></script>
+    
+    <!-- Autocomplete API function for city entered into the searchbox -->
+    <script>
+        function activatePlacesSearch(){
+            let input = document.getElementById("search-city");
+            let autocomplete = new google.maps.places.Autocomplete(input);
+        }
+    </script>
+
+    <!-- Activates your "Enter Key" as an alternative to clicking the search button-->
+    <script>
+        let inputText = document.getElementById("search-city");
+        inputText.addEventListener("keyup", function(event) {
+        if (event.keyCode === 13) {
+        event.preventDefault();
+        document.getElementById("search-button").click();
+        }
+        });
+    </script>
+
+    <!-- Js file for registration of service worker -->
+    <script src="/js/app.js"></script>
+    
+    <!-- The google maps and places API -->
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDsXStDN7aKhFVvXxxksh6IvOajXvSLdn4&libraries=places&callback=activatePlacesSearch"></script>
+    
+    <!--Code to Javascript File-->
+    <script src="/js/script.js"></script>
+</body>
+
+</html>
